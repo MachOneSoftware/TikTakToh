@@ -20,6 +20,7 @@ public class Game implements IGame {
         clearGrid();
     }
 
+    // TODO consider automatically switching between x/o
     public boolean makeMove(Letter letter, int x, int y){
         if (letter == Letter.empty)
             throw new IllegalArgumentException("Letter must be X or O");
@@ -47,6 +48,7 @@ public class Game implements IGame {
         }
     }
 
+    // TODO consider returning where the win was
     private boolean checkWin(Letter l, int x, int y){
         // Check for vertical line
         if (grid[x][0] == l && grid[x][1] == l && grid[x][2] == l)
