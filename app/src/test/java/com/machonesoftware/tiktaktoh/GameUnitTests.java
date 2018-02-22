@@ -4,16 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class GameUnitTests {
     @Test
     public void initGame() throws Exception {
         Game g = new Game();
-        assertEquals(3, g.GridSize);
+        assertEquals(3, Game.GridSize);
         checkGridIsEmpty(g);
     }
     
