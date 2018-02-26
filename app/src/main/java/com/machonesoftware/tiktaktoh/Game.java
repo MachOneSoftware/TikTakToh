@@ -1,16 +1,5 @@
 package com.machonesoftware.tiktaktoh;
 
-interface IGame{
-    int GridSize = 3;
-    boolean makeMove(Letter letter, int x, int y);
-    Letter getLetterAt(int x, int y);
-    void clearGrid();
-}
-
-enum Letter{
-    X, O, empty
-}
-
 public class Game implements IGame {
     private Letter[][] grid;
 
