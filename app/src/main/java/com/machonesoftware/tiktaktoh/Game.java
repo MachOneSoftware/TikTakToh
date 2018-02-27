@@ -1,60 +1,63 @@
 package com.machonesoftware.tiktaktoh;
 
+import java.util.Arrays;
+
 public class Game implements IGame {
-    private Letter[][] grid;
+    private Letter[] grid;
 
     public Game(){
         // Initialize the grid to empty
-        grid = new Letter[GridSize][GridSize];
+        grid = new Letter[GridSize*GridSize];
         clearGrid();
     }
 
-    // TODO consider automatically switching between x/o
-    public boolean makeMove(Letter letter, int x, int y){
+    public void placeLetter(Letter letter, int i){
         if (letter == Letter.empty)
-            throw new IllegalArgumentException("Letter must be X or O");
+            throw new IllegalArgumentException("letter");
+        if (i < 0 || i > 8)
+            throw new IllegalArgumentException("i");
 
-        if (grid[x][y] == Letter.empty)
-            grid[x][y] = letter;
-        return checkWin(letter, x, y);
+        if (grid[i] == Letter.empty)
+            grid[i] = letter;
     }
 
-    public Letter getLetterAt(int x, int y){
+    public Letter getLetterAt(int i){
         if (grid == null)
             throw new IllegalStateException("Grid is not initialized");
+        if (i < 0 || i > 8)
+            throw new IllegalArgumentException("i");
 
-        return grid[x][y];
+        return grid[i];
     }
 
     public void clearGrid(){
         if (grid == null)
             throw new IllegalStateException("Grid is not initialized");
 
-        for (int i = 0; i < GridSize; i++){
-            for (int j = 0; j < GridSize; j++){
-                grid[i][j] = Letter.empty;
-            }
+        for (int i = 0; i < GridSize * GridSize; i++) {
+            grid[i] = Letter.empty;
         }
     }
 
     // TODO consider returning where the win was
-    private boolean checkWin(Letter l, int x, int y){
-        // Check for vertical line
-        if (grid[x][0] == l && grid[x][1] == l && grid[x][2] == l)
-            return true;
+    public boolean checkWin(Letter letter){
+        if (grid == null)
+            throw new IllegalStateException("Grid is not initialized");
+        if (letter.equals(Letter.empty))
+            throw new IllegalArgumentException("letter");
 
-        // Check for horizontal line
-        if (grid[0][y] == l && grid[1][y] == l && grid[2][y] == l)
-            return true;
-
-        // Check for diagonal lines
-        if (!(x == 0 && y == 1) && !(x == 1 && y == 0) && !(x == 2 && y == 1) && !(x == 1 && y == 2)){
-            if (grid[0][0] == l && grid[1][1] == l && grid[2][2] == l)
-                return true;
-            if (grid[2][0] == l && grid[1][1] == l && grid [0][2] == l)
-                return true;
+        // Vertical
+        for (int i = 0; i < GridSize; i++){
+            if (grid[i]==letter && grid[i+3]==letter && grid[i+6]==letter) return true;
         }
 
-        return false;
+        // Horizontal
+        for (int i = 0; i < GridSize * GridSize; i+=3){
+            if (grid[i]==letter && grid[i+1]==letter && grid[i+2]==letter) return true;
+        }
+
+        // Diagonal
+        return (grid[0] == letter && grid[4] == letter && grid[8] == letter) ||
+                (grid[2] == letter && grid[4] == letter && grid[6] == letter);
     }
 }

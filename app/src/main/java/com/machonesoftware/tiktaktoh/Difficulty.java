@@ -5,5 +5,5 @@ package com.machonesoftware.tiktaktoh;
  */
 
 public enum Difficulty {
-    Easy, Medium, Hard
+    Easy, Medium, Hard, Impossible
 }

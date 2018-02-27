@@ -9,4 +9,6 @@ public interface IPlayer {
     String getName();
     Letter getLetter();
     void startGame(Game game);
+    boolean checkWin();
+    void makeMove(int i);
 }

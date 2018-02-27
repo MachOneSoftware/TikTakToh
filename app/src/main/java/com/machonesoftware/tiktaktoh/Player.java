@@ -34,4 +34,12 @@ public class Player implements IPlayer {
     public Game getGame(){
         return _game;
     }
+
+    public boolean checkWin(){
+        return _game.checkWin(_letter);
+    }
+
+    public void makeMove(int i){
+        _game.placeLetter(_letter, i);
+    }
 }

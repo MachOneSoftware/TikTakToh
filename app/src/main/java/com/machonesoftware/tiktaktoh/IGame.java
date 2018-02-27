@@ -6,7 +6,8 @@ package com.machonesoftware.tiktaktoh;
 
 public interface IGame{
     int GridSize = 3;
-    boolean makeMove(Letter letter, int x, int y);
-    Letter getLetterAt(int x, int y);
+    void placeLetter(Letter letter, int i);
+    Letter getLetterAt(int i);
     void clearGrid();
+    boolean checkWin(Letter l);
 }

@@ -6,5 +6,4 @@ package com.machonesoftware.tiktaktoh;
 
 public interface IAiPlayer extends IPlayer {
     Difficulty getDifficulty();
-    int[] findBestMove();
 }
